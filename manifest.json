@@ -1,0 +1,6 @@
+{
+  "name": "home-page",
+  "short_name": "home-page",
+  "start_url": "/",
+  "display": "standalone"
+}

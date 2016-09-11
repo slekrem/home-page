@@ -1,0 +1,59 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="signin-page">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .container {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+
+            .signin-card {
+                width: 400px;
+            }
+        </style>
+
+        <firebase-auth id="_auth"></firebase-auth>
+
+        <div class="container">
+            <paper-card
+                class="signin-card"
+                heading="Sign In">
+
+                <div class="card-content">
+                    <paper-input
+                        type="email"
+                        label="E-Mail-Adresse"
+                        value="{{email}}"></paper-input>
+                    <paper-input
+                        type="password"
+                        label="Passwort"
+                        value="{{password}}"></paper-input>
+                </div>
+
+                <div class="card-actions">
+                    <paper-button on-click="_signIn">Anmelden</paper-button>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'signin-page',
+
+            _signIn: function () {
+                this.$._auth.signInWithEmailAndPassword(
+                    this.email, this.password);
+            }
+        });
+    </script>
+</dom-module>

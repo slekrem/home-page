@@ -1,0 +1,25 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-auth.html">
+
+<dom-module id="signout-page">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+
+        <firebase-auth id="_auth"></firebase-auth>
+
+        <h1>signout</h1>
+    </template>
+    <script>
+        Polymer({
+            is: 'signout-page',
+
+            ready: function() {
+                this.$._auth.signOut();
+            },
+        });
+    </script>
+</dom-module>

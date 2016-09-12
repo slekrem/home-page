@@ -1,0 +1,20 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="menu-item.html">
+
+<dom-module id="drawer-menu">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <div role="listbox">
+            <content select="menu-item"></content>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'drawer-menu'
+        });
+    </script>
+</dom-module>

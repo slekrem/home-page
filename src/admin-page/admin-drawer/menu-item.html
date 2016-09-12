@@ -1,0 +1,30 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="menu-item">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .paper-item-link {
+                color: inherit;
+                text-decoration: none;
+            }
+        </style>
+        <a class="paper-item-link" href$="{{href}}" tabindex="-1">
+            <paper-item><content></content></paper-item>
+        </a>
+    </template>
+    <script>
+        Polymer({
+            is: 'menu-item',
+            properties: {
+                href: {
+                    type: String
+                }
+            }
+        });
+    </script>
+</dom-module>

@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/redirect-to/redirect-to.html">
 
 <dom-module id="signin-page">
     <template>
@@ -22,7 +23,13 @@
             }
         </style>
 
-        <firebase-auth id="_auth"></firebase-auth>
+        <firebase-auth
+            id="_auth"
+            signed-in="{{_signedIn}}"></firebase-auth>
+
+        <redirect-to
+            redirect$="{{_signedIn}}"
+            url="{{queryParams.redirect}}"></redirect-to>
 
         <div class="container">
             <paper-card
@@ -49,6 +56,12 @@
     <script>
         Polymer({
             is: 'signin-page',
+
+            properties: {
+                route: Object,
+                queryParams: Object,
+                _signedIn: Boolean
+            },
 
             _signIn: function () {
                 this.$._auth.signInWithEmailAndPassword(

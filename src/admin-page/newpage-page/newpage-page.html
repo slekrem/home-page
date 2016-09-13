@@ -1,0 +1,63 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../../bower_components/polymerfire/firebase-document.html">
+
+<dom-module id="newpage-page">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-card {
+                width: 100%;
+            }
+        </style>
+
+        <firebase-query
+            path="/pages"
+            order-by-child="name"
+            start-at="{{_pageName}}"
+            end-at="{{_pageName}}"
+            data="{{_pages}}"></firebase-query>
+
+        <firebase-document
+            id="_page"
+            data="{{_newPage}}"></firebase-document>
+
+        <paper-card
+            heading="New page">
+            <div class="card-content">
+                <paper-input
+                    label="Page name"
+                    value="{{_pageName}}"></paper-input>
+            </div>
+            <div class="card-actions">
+                <paper-button
+                    on-click="_createPage">create</paper-button>
+            </div>
+        </paper-card>
+    </template>
+    <script>
+        Polymer({
+            is: 'newpage-page',
+            properties: {
+                _pages: {
+                    type: Array
+                },
+                _newPage: {
+                    type: Object
+                }
+            },
+
+            _createPage: function() {
+                this._newPage.name = this._pageName;
+
+                this.$._page.save("/pages");
+            }
+        });
+    </script>
+</dom-module>

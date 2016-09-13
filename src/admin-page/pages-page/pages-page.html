@@ -1,0 +1,46 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="pages-page">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .paper-item-link {
+                color: inherit;
+                text-decoration: none;
+            }
+        </style>
+
+        <firebase-query
+            path="/pages"
+            data="{{_pages}}"></firebase-query>
+
+        <paper-listbox>
+            <template
+                is="dom-repeat"
+                items="[[_pages]]">
+                <a class="paper-item-link" href$="/admin/page/[[item.name]]" tabindex="-1">
+                    <paper-item>[[item.name]]</paper-item>
+                </a>
+            </template>
+        </paper-listbox>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'pages-page',
+
+            properties: {
+                _pages: {
+                    type: Array
+                }
+            }
+        });
+    </script>
+</dom-module>
